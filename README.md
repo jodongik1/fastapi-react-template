@@ -12,12 +12,12 @@
 ### 방법 A. 프로젝트 생성 스크립트 사용 (가장 간편한 방법)
 저장소에 포함된 자동화 스크립트를 사용해 프로젝트 생성부터 도커 실행까지 한 번에 완료할 수 있습니다:
 ```bash
-# 실행 권한 부여 후 프로젝트 생성 (기본값: --private)
+# 실행 권한 부여 후 프로젝트 생성 (기본값: --public 공개 저장소)
 chmod +x scripts/setup_project.sh
 ./scripts/setup_project.sh <새_프로젝트명>
 
-# 공개 저장소로 생성하려면:
-./scripts/setup_project.sh <새_프로젝트명> --public
+# 비공개(private) 저장소로 생성하려면:
+./scripts/setup_project.sh <새_프로젝트명> --private
 ```
 
 ### 방법 B. GitHub CLI (`gh`) 직접 사용 (터미널)
