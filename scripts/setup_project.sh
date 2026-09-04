@@ -3,20 +3,28 @@
 # 오류 발생 시 스크립트 즉시 중단
 set -e
 
-# 1. 인자값(프로젝트명) 확인
+# 1. 인자값(프로젝트명 및 공개 설정) 확인
 if [ -z "$1" ]; then
   echo "Error: 프로젝트 이름을 입력해주세요."
-  echo "사용법: ./scripts/setup_project.sh <새_프로젝트명>"
+  echo "사용법: ./scripts/setup_project.sh <새_프로젝트명> [--private|--public]"
+  echo "예시: ./scripts/setup_project.sh my-project --private"
   exit 1
 fi
 
 PROJECT_NAME="$1"
+VISIBILITY="${2:---private}" # 기본값: --private (비공개)
 
-echo "🚀 '$PROJECT_NAME' 프로젝트 생성을 시작합니다..."
+# VISIBILITY 유효성 검사
+if [ "$VISIBILITY" != "--private" ] && [ "$VISIBILITY" != "--public" ] && [ "$VISIBILITY" != "--internal" ]; then
+  echo "⚠️  알 수 없는 공개 설정 옵션입니다: $VISIBILITY (기본값인 --private으로 진행합니다.)"
+  VISIBILITY="--private"
+fi
+
+echo "🚀 '$PROJECT_NAME' ($VISIBILITY) 프로젝트 생성을 시작합니다..."
 
 # 2. 템플릿 기반으로 저장소 생성 및 로컬 클론
 echo "📦 GitHub 저장소 생성 및 클론 중..."
-gh repo create "$PROJECT_NAME" --template jodongik1/fastapi-react-template --clone
+gh repo create "$PROJECT_NAME" --template jodongik1/fastapi-react-template "$VISIBILITY" --clone
 
 # 3. 해당 디렉토리로 이동
 cd "$PROJECT_NAME"
