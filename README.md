@@ -9,7 +9,15 @@
 
 이 저장소는 **GitHub Template Repository**입니다. 새로운 프로젝트를 시작할 때 아래 두 가지 방법 중 편한 방식을 선택하세요.
 
-### 방법 A. GitHub CLI (`gh`) 사용 (터미널)
+### 방법 A. 프로젝트 생성 스크립트 사용 (가장 간편한 방법)
+저장소에 포함된 자동화 스크립트를 사용해 프로젝트 생성부터 도커 실행까지 한 번에 완료할 수 있습니다:
+```bash
+# 실행 권한 부여 후 프로젝트 생성
+chmod +x scripts/setup_project.sh
+./scripts/setup_project.sh <새_프로젝트명>
+```
+
+### 방법 B. GitHub CLI (`gh`) 직접 사용 (터미널)
 ```bash
 # 1. 템플릿 기반으로 새 저장소 생성 및 로컬 클론 (예: my-project)
 gh repo create <새_프로젝트명> --template jodongik1/fastapi-react-template --clone
@@ -22,7 +30,7 @@ cp .env.example .env
 docker compose up -d --build
 ```
 
-### 방법 B. GitHub 웹 UI 사용
+### 방법 C. GitHub 웹 UI 사용
 1. [fastapi-react-template](https://github.com/jodongik1/fastapi-react-template) 저장소 페이지 접속
 2. 상단 우측 초록색 **`Use this template`** ➔ **`Create a new repository`** 클릭
 3. 새 저장소 이름 입력 및 생성 후 로컬에 `git clone`하여 개발 시작
